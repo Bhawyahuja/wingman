@@ -5,8 +5,8 @@ import 'package:wingman/components/custom__textfield.dart';
 import 'package:wingman/components/custom_button.dart';
 import 'package:wingman/components/custom_scaffold.dart';
 import 'package:wingman/components/custom_snackbar.dart';
+import 'package:wingman/features/auth/auth_navigator.dart';
 import 'package:wingman/features/auth/login/logic/login_cubit.dart';
-import 'package:wingman/features/auth/verification/ui/verification_page.dart';
 import 'package:wingman/generated/assets.dart';
 
 class LoginPage extends StatelessWidget {
@@ -46,13 +46,12 @@ class _LoginBodyState extends State<LoginBody> {
     return BlocConsumer<LoginCubit, LoginState>(
       listener: (context, state) {
         state.whenOrNull(
-          success: (message) {
+          success: (mobileNumber, message) {
             CustomSnackBar.show(context, message, icon: Icons.check);
-            Navigator.push(
+            Navigator.pushNamed(
               context,
-              MaterialPageRoute(
-                builder: (context) => const VerificationPage(),
-              ),
+              AuthRoutes.verification,
+              arguments: mobileNumber,
             );
           },
           failure: (e, message) => CustomSnackBar.show(context, message),
@@ -119,9 +118,7 @@ class _LoginBodyState extends State<LoginBody> {
                   CustomButton(
                     text: "Continue",
                     showLoader: state == const LoginState.loading(),
-                    onTap: () {
-                      _cubit.login(_isoCode, _controller.text);
-                    },
+                    onTap: () => _cubit.login(_isoCode, _controller.text),
                   ),
                 ],
               ),

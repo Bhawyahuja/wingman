@@ -4,25 +4,31 @@ import 'package:pin_code_fields/pin_code_fields.dart';
 import 'package:wingman/components/custom_button.dart';
 import 'package:wingman/components/custom_scaffold.dart';
 import 'package:wingman/components/custom_snackbar.dart';
+import 'package:wingman/features/auth/logic/auth_cubit.dart';
 import 'package:wingman/features/auth/verification/logic/verification_cubit.dart';
 import 'package:wingman/features/home/home_page.dart';
 import 'package:wingman/features/onboarding/ui/onboarding_page.dart';
 import 'package:wingman/generated/assets.dart';
 
 class VerificationPage extends StatelessWidget {
-  const VerificationPage({Key? key}) : super(key: key);
+  const VerificationPage({Key? key, required this.mobileNumber})
+      : super(key: key);
+
+  final String mobileNumber;
 
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) => VerificationCubit(),
-      child: const VerificationBody(),
+      child: VerificationBody(mobileNumber),
     );
   }
 }
 
 class VerificationBody extends StatefulWidget {
-  const VerificationBody({Key? key}) : super(key: key);
+  const VerificationBody(this.mobileNumber, {Key? key}) : super(key: key);
+
+  final String mobileNumber;
 
   @override
   State<VerificationBody> createState() => _VerificationBodyState();
@@ -32,10 +38,12 @@ class _VerificationBodyState extends State<VerificationBody> {
   final TextEditingController _controller = TextEditingController();
 
   late VerificationCubit _cubit;
+  late AuthCubit _authCubit;
 
   @override
   void initState() {
     _cubit = BlocProvider.of<VerificationCubit>(context);
+    _authCubit = BlocProvider.of<AuthCubit>(context);
     super.initState();
   }
 
@@ -48,19 +56,21 @@ class _VerificationBodyState extends State<VerificationBody> {
         state.whenOrNull(
           success: (profileExists) {
             if (profileExists) {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => const HomePage(),
-                ),
-              );
+              _authCubit.onboard();
+              // Navigator.push(
+              //   context,
+              //   MaterialPageRoute(
+              //     builder: (context) => const HomePage(),
+              //   ),
+              // );
             } else {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => const OnBoardingPage(),
-                ),
-              );
+              _authCubit.logIn();
+              // Navigator.push(
+              //   context,
+              //   MaterialPageRoute(
+              //     builder: (context) => const OnBoardingPage(),
+              //   ),
+              // );
             }
           },
           failure: (e, message) => CustomSnackBar.show(context, message),
@@ -87,9 +97,8 @@ class _VerificationBodyState extends State<VerificationBody> {
                     style: theme.textTheme.headlineMedium,
                   ),
                   const SizedBox(height: 8),
-                  //TODO: add custom number
                   Text(
-                    "OTP has been sent to +91 xxxxxxxx",
+                    "OTP has been sent to ${widget.mobileNumber}",
                     style: theme.textTheme.titleMedium,
                   ),
                   const SizedBox(height: 20),

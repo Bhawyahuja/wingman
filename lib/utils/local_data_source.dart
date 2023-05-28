@@ -12,6 +12,7 @@ class LocalDataSource {
   SharedPreferences? _preferences;
   static const String _requestId = "request_id";
   static const String _jwt = "jwt";
+  static const String _onboarded = "onboarded";
 
   Future<void> _initPrefs() async {
     _preferences ??= await SharedPreferences.getInstance();
@@ -37,5 +38,22 @@ class LocalDataSource {
   Future<String?> getJwt() async {
     await _initPrefs();
     return _preferences!.getString(_jwt);
+  }
+
+  // onboarded
+  Future<bool> setOnboarded() async {
+    await _initPrefs();
+    return _preferences!.setBool(_onboarded, true);
+  }
+
+  Future<bool> getOnboarded() async {
+    await _initPrefs();
+    return _preferences!.getBool(_onboarded) ?? false;
+  }
+
+  // clear data
+  Future<bool> clear() async {
+    await _initPrefs();
+    return _preferences!.clear();
   }
 }

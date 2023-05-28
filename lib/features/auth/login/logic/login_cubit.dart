@@ -34,7 +34,7 @@ class LoginCubit extends Cubit<LoginState> {
         } else {
           LoginResponseDto response = await _repository.login(mobile);
           if (response.status) {
-            emit(LoginState.success(response.response));
+            emit(LoginState.success(phoneNumber, response.response));
           } else {
             emit(
               const LoginState.failure(
