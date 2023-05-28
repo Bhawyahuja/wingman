@@ -23,7 +23,7 @@ mixin _$LoginResponseDto {
   bool get status => throw _privateConstructorUsedError;
   String get response => throw _privateConstructorUsedError;
   @JsonKey(name: "request_id")
-  String get requestId => throw _privateConstructorUsedError;
+  String? get requestId => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -40,7 +40,7 @@ abstract class $LoginResponseDtoCopyWith<$Res> {
   $Res call(
       {bool status,
       String response,
-      @JsonKey(name: "request_id") String requestId});
+      @JsonKey(name: "request_id") String? requestId});
 }
 
 /// @nodoc
@@ -58,7 +58,7 @@ class _$LoginResponseDtoCopyWithImpl<$Res, $Val extends LoginResponseDto>
   $Res call({
     Object? status = null,
     Object? response = null,
-    Object? requestId = null,
+    Object? requestId = freezed,
   }) {
     return _then(_value.copyWith(
       status: null == status
@@ -69,10 +69,10 @@ class _$LoginResponseDtoCopyWithImpl<$Res, $Val extends LoginResponseDto>
           ? _value.response
           : response // ignore: cast_nullable_to_non_nullable
               as String,
-      requestId: null == requestId
+      requestId: freezed == requestId
           ? _value.requestId
           : requestId // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
     ) as $Val);
   }
 }
@@ -88,7 +88,7 @@ abstract class _$$_LoginResponseDtoCopyWith<$Res>
   $Res call(
       {bool status,
       String response,
-      @JsonKey(name: "request_id") String requestId});
+      @JsonKey(name: "request_id") String? requestId});
 }
 
 /// @nodoc
@@ -104,7 +104,7 @@ class __$$_LoginResponseDtoCopyWithImpl<$Res>
   $Res call({
     Object? status = null,
     Object? response = null,
-    Object? requestId = null,
+    Object? requestId = freezed,
   }) {
     return _then(_$_LoginResponseDto(
       null == status
@@ -115,10 +115,10 @@ class __$$_LoginResponseDtoCopyWithImpl<$Res>
           ? _value.response
           : response // ignore: cast_nullable_to_non_nullable
               as String,
-      null == requestId
+      freezed == requestId
           ? _value.requestId
           : requestId // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
     ));
   }
 }
@@ -138,7 +138,7 @@ class _$_LoginResponseDto implements _LoginResponseDto {
   final String response;
   @override
   @JsonKey(name: "request_id")
-  final String requestId;
+  final String? requestId;
 
   @override
   String toString() {
@@ -177,7 +177,7 @@ class _$_LoginResponseDto implements _LoginResponseDto {
 
 abstract class _LoginResponseDto implements LoginResponseDto {
   const factory _LoginResponseDto(final bool status, final String response,
-          @JsonKey(name: "request_id") final String requestId) =
+          @JsonKey(name: "request_id") final String? requestId) =
       _$_LoginResponseDto;
 
   factory _LoginResponseDto.fromJson(Map<String, dynamic> json) =
@@ -189,7 +189,7 @@ abstract class _LoginResponseDto implements LoginResponseDto {
   String get response;
   @override
   @JsonKey(name: "request_id")
-  String get requestId;
+  String? get requestId;
   @override
   @JsonKey(ignore: true)
   _$$_LoginResponseDtoCopyWith<_$_LoginResponseDto> get copyWith =>

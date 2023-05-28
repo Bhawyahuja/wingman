@@ -11,7 +11,7 @@ class LoginResponseDto with _$LoginResponseDto {
   const factory LoginResponseDto(
     bool status,
     String response,
-    @JsonKey(name: "request_id") String requestId,
+    @JsonKey(name: "request_id") String? requestId,
   ) = _LoginResponseDto;
 
   factory LoginResponseDto.fromJson(Map<String, Object?> json) =>

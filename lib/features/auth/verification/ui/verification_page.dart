@@ -6,8 +6,6 @@ import 'package:wingman/components/custom_scaffold.dart';
 import 'package:wingman/components/custom_snackbar.dart';
 import 'package:wingman/features/auth/logic/auth_cubit.dart';
 import 'package:wingman/features/auth/verification/logic/verification_cubit.dart';
-import 'package:wingman/features/home/home_page.dart';
-import 'package:wingman/features/onboarding/ui/onboarding_page.dart';
 import 'package:wingman/generated/assets.dart';
 
 class VerificationPage extends StatelessWidget {
@@ -57,20 +55,8 @@ class _VerificationBodyState extends State<VerificationBody> {
           success: (profileExists) {
             if (profileExists) {
               _authCubit.onboard();
-              // Navigator.push(
-              //   context,
-              //   MaterialPageRoute(
-              //     builder: (context) => const HomePage(),
-              //   ),
-              // );
             } else {
               _authCubit.logIn();
-              // Navigator.push(
-              //   context,
-              //   MaterialPageRoute(
-              //     builder: (context) => const OnBoardingPage(),
-              //   ),
-              // );
             }
           },
           failure: (e, message) => CustomSnackBar.show(context, message),

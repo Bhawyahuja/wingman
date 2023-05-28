@@ -10,7 +10,7 @@ _$_LoginResponseDto _$$_LoginResponseDtoFromJson(Map<String, dynamic> json) =>
     _$_LoginResponseDto(
       json['status'] as bool,
       json['response'] as String,
-      json['request_id'] as String,
+      json['request_id'] as String?,
     );
 
 Map<String, dynamic> _$$_LoginResponseDtoToJson(_$_LoginResponseDto instance) =>

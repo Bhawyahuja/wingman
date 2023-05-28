@@ -19,7 +19,8 @@ class LocalDataSource {
   }
 
   // request id
-  Future<bool> setRequestId(String requestId) async {
+  Future<bool> setRequestId(String? requestId) async {
+    if (requestId == null) return false;
     await _initPrefs();
     return _preferences!.setString(_requestId, requestId);
   }

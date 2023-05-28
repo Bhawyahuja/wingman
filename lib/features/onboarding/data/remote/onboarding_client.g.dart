@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'login_client.dart';
+part of 'onboarding_client.dart';
 
 // **************************************************************************
 // RetrofitGenerator
@@ -8,8 +8,8 @@ part of 'login_client.dart';
 
 // ignore_for_file: unnecessary_brace_in_string_interps,no_leading_underscores_for_local_identifiers
 
-class _LoginClient implements LoginClient {
-  _LoginClient(
+class _OnboardingClient implements OnboardingClient {
+  _OnboardingClient(
     this._dio, {
     this.baseUrl,
   }) {
@@ -21,12 +21,13 @@ class _LoginClient implements LoginClient {
   String? baseUrl;
 
   @override
-  Future<LoginResponseDto> login(LoginRequestDto loginRequest) async {
+  Future<LoginResponseDto> submitProfile(
+      OnboardingRequestDto onboardingRequest) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
-    _data.addAll(loginRequest.toJson());
+    _data.addAll(onboardingRequest.toJson());
     final _result = await _dio
         .fetch<Map<String, dynamic>>(_setStreamType<LoginResponseDto>(Options(
       method: 'POST',
@@ -35,7 +36,7 @@ class _LoginClient implements LoginClient {
     )
             .compose(
               _dio.options,
-              'sendotp.php',
+              'profilesubmit.php',
               queryParameters: queryParameters,
               data: _data,
             )

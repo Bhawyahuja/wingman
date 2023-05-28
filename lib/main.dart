@@ -38,7 +38,7 @@ class MyApp extends StatelessWidget {
           return state.when(
             uninitialized: () => const SplashPage(),
             unauthenticated: () => const AuthNavigator(),
-            authenticated: () => const OnBoardingPage(),
+            authenticated: () => const OnboardingPage(),
             onboarded: () => const HomePage(),
           );
         },
