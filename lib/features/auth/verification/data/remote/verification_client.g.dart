@@ -12,7 +12,9 @@ class _VerificationClient implements VerificationClient {
   _VerificationClient(
     this._dio, {
     this.baseUrl,
-  });
+  }) {
+    baseUrl ??= 'https://test-otp-api.7474224.xyz/';
+  }
 
   final Dio _dio;
 
@@ -33,7 +35,7 @@ class _VerificationClient implements VerificationClient {
     )
             .compose(
               _dio.options,
-              'https://test-otp-api.7474224.xyz/verifyotp.php',
+              'verifyotp.php',
               queryParameters: queryParameters,
               data: _data,
             )

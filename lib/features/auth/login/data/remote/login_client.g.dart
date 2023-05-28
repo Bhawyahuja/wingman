@@ -12,7 +12,9 @@ class _LoginClient implements LoginClient {
   _LoginClient(
     this._dio, {
     this.baseUrl,
-  });
+  }) {
+    baseUrl ??= 'https://test-otp-api.7474224.xyz/';
+  }
 
   final Dio _dio;
 
@@ -32,7 +34,7 @@ class _LoginClient implements LoginClient {
     )
             .compose(
               _dio.options,
-              'https://test-otp-api.7474224.xyz/sendotp.php',
+              'sendotp.php',
               queryParameters: queryParameters,
               data: _data,
             )
